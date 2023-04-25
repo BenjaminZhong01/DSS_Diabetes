@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from diabetes.forms import VitalsForm, PredictionForm
 
-from diabetes.lr_offline import save_record, to_csv, logistic_regression, predict
+from diabetes.lr_offline import save_record, to_csv, logistic_regression, predict, stat_plots
 
 # Create your views here.
 def home_action(request):
@@ -108,3 +108,7 @@ def predict_action(request):
         context['message'] = "no potential diabetes" if y_predict == 0 else "potential diabetes"
 
     return render(request, 'diabetes/predict.html', context)
+
+def statistics_action(request):
+    stat_plots()
+    return render(request, 'diabetes/statistics.html', {})

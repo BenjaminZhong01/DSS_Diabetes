@@ -11,10 +11,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 import pickle
 
+import pandas as pd
+import matplotlib.pyplot as plt
+
 cur_file_path = os.path.dirname(os.path.abspath(__file__))
 config_file_path = os.path.join(cur_file_path, 'config.json')
 dataset_file_path = os.path.join(cur_file_path,'data','data_preprocess.csv')
 model_file_path = os.path.join(cur_file_path, 'data', 'model_fitted.sav')
+
+age_hist_file_path = os.path.join(cur_file_path, 'static', 'age_hist.png')
 
 
 def read_json(file):
@@ -153,6 +158,27 @@ def predict(patient_info, model=model_file_path):
     y_predict = loaded_model.predict(new_X)
     print(y_predict)
     return y_predict
+
+def stat_plots(dataset=dataset_file_path):
+
+    def age_hist_plt(file=age_hist_file_path):
+        df = pd.read_csv(dataset)
+
+        # Filter the population with class == 1
+        df_class1 = df[df['class'] == 1]
+
+        # Create a histogram of Age
+        plt.hist(df_class1['Age'], bins=10)
+
+        # Add x and y axis labels and a title
+        plt.xlabel('Age')
+        plt.ylabel('Frequency')
+        plt.title('Histogram of Age for population with diabetes')
+
+        # Save the plot to a file path
+        plt.savefig(file)
+    
+    age_hist_plt()
 
 if __name__ == '__main__':
     print(read_json('config.json'))
