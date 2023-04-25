@@ -20,6 +20,8 @@
     <button type="submit">Predict</button>
 </form>
 
+<button id="reset"><a href="{% url 'predict' %}" id="res">Reset</a></button>
+
 {% if message == "no potential diabetes" %} 
 <p class="negative">{{message}}</p>
 {% elif message == "potential diabetes"%}

@@ -168,7 +168,7 @@ def stat_plots(dataset=dataset_file_path):
         df_class1 = df[df['class'] == 1]
 
         # Create a histogram of Age
-        plt.hist(df_class1['Age'], bins=10)
+        plt.hist(df_class1['Age'], bins=10, color='lightblue')
 
         # Add x and y axis labels and a title
         plt.xlabel('Age')

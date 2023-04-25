@@ -5,8 +5,8 @@ from diabetes.forms import VitalsForm, PredictionForm
 from diabetes.lr_offline import save_record, to_csv, logistic_regression, predict, stat_plots
 
 # Create your views here.
-def home_action(request):
-    return render(request, 'diabetes/base.html', {})
+def welcome_action(request):
+    return render(request, 'diabetes/welcome.html', {})
 
 def about_action(request):
     return render(request, 'diabetes/about.html', {})
@@ -102,8 +102,6 @@ def predict_action(request):
 
         y_predict = predict(patient_info)[0]
 
-        # Create new instance of the form to clear it
-        form = PredictionForm()
         context['form'] = form
         context['message'] = "no potential diabetes" if y_predict == 0 else "potential diabetes"
 
