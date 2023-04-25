@@ -1,0 +1,6 @@
+{
+    "host": "localhost",
+    "mysql_username": "root",
+    "mysql_password": "jiejie156521",
+    "database_name": "diabetes"
+}

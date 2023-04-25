@@ -47,3 +47,7 @@ form {
     font-size: 15px;
 }
 
+#saved_msg {
+    font-size: medium;
+    color: orange;
+}

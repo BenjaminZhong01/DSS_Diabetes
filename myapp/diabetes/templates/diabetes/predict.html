@@ -1,10 +1,10 @@
 {% extends "diabetes/base.html" %}
 
-{% block pagename %} Add New Record {% endblock %}
+{% block pagename %} Prediction {% endblock %}
 
 {% block content %}
 
-<form method="post" action="{% url 'new_record' %}">
+<form method="post" action="{% url 'predict' %}">
     <table>
         {% for field in form.visible_fields %}
             <tr>
@@ -17,8 +17,7 @@
         {% endfor %}
     </table>
     {% csrf_token %}
-    <button type="submit">Save</button>
+    <button type="submit">Predict</button>
 </form>
-<p id="saved_msg">{{message}}</p>
 
 {% endblock %}
