@@ -4,6 +4,7 @@ import mysql.connector
 import csv
 import os
 import time
+import numpy as np
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -126,7 +127,7 @@ def logistic_regression(dataset=dataset_file_path):
     data = pd.read_csv(dataset)
 
     # separate the features and target variable
-    X = data.iloc[:, :-1]
+    X = data.iloc[:, 1:-1]
     y = data.iloc[:, -1]
 
     # split the data into training and test sets
@@ -140,6 +141,18 @@ def logistic_regression(dataset=dataset_file_path):
 
     # save the model to disk
     pickle.dump(log_reg, open(model_file_path, 'wb'))
+
+def predict(patient_info, model=model_file_path):
+    loaded_model = pickle.load(open(model, 'rb'))
+
+    X = []
+    for key, value in patient_info.items():
+        X.append(value)
+    print(X)
+    new_X = np.array(X).reshape(1,-1)
+    y_predict = loaded_model.predict(new_X)
+    print(y_predict)
+    return y_predict
 
 if __name__ == '__main__':
     print(read_json('config.json'))

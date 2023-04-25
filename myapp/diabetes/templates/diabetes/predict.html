@@ -20,4 +20,10 @@
     <button type="submit">Predict</button>
 </form>
 
+{% if message == "no potential diabetes" %} 
+<p class="negative">{{message}}</p>
+{% elif message == "potential diabetes"%}
+<p class="positive">{{message}}</p>
+{% endif %}
+
 {% endblock %}

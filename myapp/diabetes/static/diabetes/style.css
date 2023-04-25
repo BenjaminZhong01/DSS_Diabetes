@@ -51,3 +51,13 @@ form {
     font-size: medium;
     color: orange;
 }
+
+.positive {
+    font-size: 20px;
+    color: red;
+}
+
+.negative {
+    font-size: 20px;
+    color: lightgreen;
+}
