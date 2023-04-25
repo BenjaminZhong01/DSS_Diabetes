@@ -5,7 +5,16 @@ import csv
 import os
 import time
 
-config_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+import pickle
+
+cur_file_path = os.path.dirname(os.path.abspath(__file__))
+config_file_path = os.path.join(cur_file_path, 'config.json')
+dataset_file_path = os.path.join(cur_file_path,'data','data_preprocess.csv')
+model_file_path = os.path.join(cur_file_path, 'data', 'model_fitted.sav')
+
 
 def read_json(file):
     with open(file) as f:
@@ -55,7 +64,7 @@ def to_csv(config_file=config_file_path):
     mydb.close()
 
     # Creating a CSV file and writing the data to it
-    with open('/data/data_preprocess.csv', mode='w', newline='') as file:
+    with open(dataset_file_path, mode='w', newline='') as file:
         writer = csv.writer(file)
         # Writing the header row
         writer.writerow(['id', 'Age', 'Gender', 'Polyuria', 'Polydipsia', 'sudden_weight_loss', 'weakness', 'Polyphagia', 'Genital_thrush', 'visual_blurring', 'Itching', 'Irritability', 'delayed_healing', 'partial_paresis', 'muscle_stiffness', 'Alopecia', 'Obesity', 'class'])
@@ -112,6 +121,25 @@ def save_record(patient_info, config_file=config_file_path):
     cursor.close()
     mydb.close()
 
+def logistic_regression(dataset=dataset_file_path):
+    # load the dataset
+    data = pd.read_csv(dataset)
+
+    # separate the features and target variable
+    X = data.iloc[:, :-1]
+    y = data.iloc[:, -1]
+
+    # split the data into training and test sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+    # create a logistic regression model
+    log_reg = LogisticRegression()
+
+    # fit the model on the training data
+    log_reg.fit(X_train, y_train)
+
+    # save the model to disk
+    pickle.dump(log_reg, open(model_file_path, 'wb'))
 
 if __name__ == '__main__':
     print(read_json('config.json'))

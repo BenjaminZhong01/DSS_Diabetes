@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from diabetes.forms import VitalsForm, PredictionForm
 
-from diabetes.lr_offline import save_record
+from diabetes.lr_offline import save_record, to_csv, logistic_regression
 
 # Create your views here.
 def home_action(request):
@@ -59,6 +59,11 @@ def new_record_action(request):
         context['form'] = form
         context['message'] = "Record saved successfully!"
 
+        # read the database and create a CSV file for model fitting process
+        to_csv()
+
+        #model training
+        logistic_regression()
 
     return render(request, 'diabetes/newrecord.html', context)
 
