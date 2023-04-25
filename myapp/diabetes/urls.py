@@ -7,4 +7,5 @@ urlpatterns = [
     path('newrecord', views.new_record_action, name='new_record'),
     path('predict', views.predict_action, name='predict'),
     path('statistics', views.statistics_action, name='statistics'),
+    path('suggestions', views.suggestions_action, name='suggestions'),
 ]

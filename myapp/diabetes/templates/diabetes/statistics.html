@@ -5,7 +5,14 @@
 {% load static %}
 
 {% block content %}
-
-<img src="/static/age_hist.png" alt="Histogram of Age">
+<div class="scrollable">
+    <div class="imgset">
+        <img src="/static/age_hist.png" alt="Histogram of Age" class="stat">
+        <img src="/static/gender_pie.png" alt="Histogram of Age"  class="stat">
+    </div>
+    <div>
+        <img src="/static/symptom_hist.png" alt="Histogram of Age" class="stat">
+    </div>
+</div>
 
 {% endblock %}

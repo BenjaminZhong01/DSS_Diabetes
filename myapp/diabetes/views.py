@@ -110,3 +110,6 @@ def predict_action(request):
 def statistics_action(request):
     stat_plots()
     return render(request, 'diabetes/statistics.html', {})
+
+def suggestions_action(request):
+    return render(request, 'diabetes/suggestions.html', {})

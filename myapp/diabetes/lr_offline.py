@@ -20,6 +20,8 @@ dataset_file_path = os.path.join(cur_file_path,'data','data_preprocess.csv')
 model_file_path = os.path.join(cur_file_path, 'data', 'model_fitted.sav')
 
 age_hist_file_path = os.path.join(cur_file_path, 'static', 'age_hist.png')
+gender_pie_file_path = os.path.join(cur_file_path, 'static', 'gender_pie.png')
+symptom_hist_file_path = os.path.join(cur_file_path, 'static', 'symptom_hist.png')
 
 
 def read_json(file):
@@ -177,8 +179,62 @@ def stat_plots(dataset=dataset_file_path):
 
         # Save the plot to a file path
         plt.savefig(file)
+        plt.close()
+    
+    def gender_pie_plt(file=gender_pie_file_path):
+        # Read the dataset
+        df = pd.read_csv(dataset)
+
+        # Replace gender values
+        gender_dict = {0: 'Female', 1: 'Male'}
+        df['Gender'] = df['Gender'].replace(gender_dict)
+
+        # Filter by class == 1
+        df_class1 = df[df['class'] == 1]
+
+        # Create the pie chart
+        fig, ax = plt.subplots()
+        color = ['lightblue', 'pink']
+        ax.pie(df_class1['Gender'].value_counts(), labels=df_class1['Gender'].value_counts().index, autopct='%1.1f%%', colors=color)
+        ax.set_title('Gender Distribution for Class 1 Diabetes')
+
+        # Add legend on the side
+        ax.legend(title='Gender', loc='center left', bbox_to_anchor=(1, 0.5))
+
+        # Save the figure
+        fig.savefig(file)
+        plt.close()
+
+    def symptom_hist_plt(file=symptom_hist_file_path):
+        # Read the dataset
+        df = pd.read_csv(dataset)
+
+        # Filter the rows with class == 1
+        df = df[df['class'] == 1]
+
+        # Select the symptom columns
+        symptom_columns = ['Polyuria', 'Polydipsia', 'sudden_weight_loss', 'weakness', 'Polyphagia', 'Genital_thrush', 'visual_blurring', 'Itching', 'Irritability', 'delayed_healing', 'partial_paresis', 'muscle_stiffness', 'Alopecia', 'Obesity']
+        symptoms = df[symptom_columns]
+
+        # Calculate the frequency of each symptom
+        freq = symptoms.sum()
+
+        # Plot the histogram
+        fig = plt.figure(figsize=(10,5))
+        plt.bar(symptom_columns, freq, color='lightblue')
+        plt.xticks(rotation=90)
+        plt.title('Symptom frequency for diabetes')
+        plt.xlabel('Symptoms')
+        plt.ylabel('Frequency')
+        plt.tight_layout()
+        plt.savefig(file)
+        plt.close()
+
     
     age_hist_plt()
+    gender_pie_plt()
+    symptom_hist_plt()
+
 
 if __name__ == '__main__':
     print(read_json('config.json'))

@@ -3,5 +3,19 @@
 {% block pagename %} About {% endblock %}
 
 {% block content %}
-<p>this is the about page.</p>
+<div id="about_info">
+    <p>Diabetes, specifically type 2 diabetes, is an endocrinological disorder that often presents without symptoms or nonspecific symptoms. 
+        Patients may present late, and therefore are at risk of developing complications of different body systems, such as eyes (diabetic retinopathy), 
+        kidneys (diabetic nephropathy), or peripheral nerves (mononeuritis multiplex). Early diagnosis and intervention is key in reducing complications 
+        and therefore improving patient prognosis. The DSS will utilize advanced data mining methods to predict patient risk of diabetes.</p>
+        <img src="/static/population.jpeg" alt="population" style="height: 300px; width: auto; position: relative; left: 250px;">
+        <h4>Early-Stage Diabetes Diagnosis Functions: </h4>
+        <ul>
+            <li>Users: nurses, pysicians, and public healthcare provider</li>
+            <li>Nurses can take vitals of the patients and save the data into MySQL database. The application will train the model again after the new datapoint added in.</li>
+            <li>Physician can input the patients data and the application will report the likelihood of a potential diabetes, and give treatment suggestions to risky patients.</li>
+            <li>Application illustrates the statistical information with the latest dataset.</li>
+        </ul>
+        <img src="/static/workflow.jpeg" alt="workflow" style="height: 300px; width: auto; position: relative; left: 0px; margin-top: 20px;">
+</div>
 {% endblock %}
