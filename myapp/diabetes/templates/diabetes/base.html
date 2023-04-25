@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    {% load static %}
+		<link href="{% static 'diabetes/style.css' %}" rel="stylesheet" type="text/css">
+		<title> {% block title %} Diabetes Prediction {% endblock %} </title>
+	</head>
+
+	<body>
+		<div class="header" id="id_header_div">
+			<h2 class="sitename">Early-Stage Diabetes Prediction System</h2>
+		</div>
+		<div class="links">
+			<a href="{% url 'about' %}" id="id_about"><button class="button">About</button></a>
+			<a href="{% url 'new_record' %}" id="id_new_record"><button class="button">New Record</button></a>
+			<a href="{% url 'predict' %}" id="id_predict"><button class="button">Prediction</button></a>
+			<a href="{% url 'statistics' %}" id="id_statistics"><button class="button">Statistics</button></a>
+		</div>
+
+        <h1 class="pagename" id="id_page_name"> {% block pagename %} Base {% endblock %}</h1>
+
+        <div class="content">
+		    {% block content %}
+		    {% endblock %}
+		</div>
+        
+	</body>
+</html>

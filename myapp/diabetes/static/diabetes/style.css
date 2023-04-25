@@ -1,0 +1,49 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+
+.header {
+    height:100px;
+    display: flex;
+    align-items: center; /* align items vertically */
+    justify-content: center; /* align items horizontally */
+    flex-direction: column;
+    background-color: #008080;
+    text-align: center;
+}
+
+.sitename {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    color:aliceblue;
+    line-height: 0px;
+}
+
+
+.links {
+    font-size: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    color:aliceblue;
+    text-align: left;
+    margin:10px;
+}
+
+.button {
+    font-size: 20px;
+}
+
+.content {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+}
+
+form {
+    width: auto;
+    text-align: left;
+    font-size: 15px;
+}
+

@@ -1,0 +1,23 @@
+{% extends "diabetes/base.html" %}
+
+{% block pagename %} Add New Record {% endblock %}
+
+{% block content %}
+
+<form method="post" action="{% url 'new_record' %}">
+    <table>
+        {% for field in form.visible_fields %}
+            <tr>
+                <td>{{field.label_tag}}</td>
+                <td>{{field}}</td>
+                <td class="error">
+                    {% for error in field.errors %} {{error}} {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% csrf_token %}
+    <button type="submit" id="id_save_button">Save</button>
+</form>
+
+{% endblock %}
