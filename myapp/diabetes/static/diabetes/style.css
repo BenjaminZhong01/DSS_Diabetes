@@ -241,6 +241,8 @@ th {
 
   
   .table-container {
-    width: 45%;
+    display: flex; 
+    justify-content: center; 
+    margin: 20px;
   }
   
