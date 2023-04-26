@@ -189,6 +189,7 @@ header {
   overflow-x: auto; /* Enable horizontal scrolling */
   white-space: nowrap; /* Prevent content from wrapping */
   margin-bottom: 100px;
+  width: auto;
 }
 
 .imgset {
@@ -200,3 +201,46 @@ header {
     font-size: large;
     width: 1000px;
 }
+
+table {
+    border-collapse: collapse;
+    margin: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    border: none;
+  }
+  
+th {
+    padding: 8px;
+    text-align: left;
+    background-color: lightblue;
+    color: black;
+  } 
+  
+.statd {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+  } 
+  
+  .true-positive {
+    background-color: lightcyan;
+  }
+  
+  .false-positive {
+    background-color: pink;
+  }
+  
+  .false-negative {
+    background-color: pink;
+  }
+  
+  .true-negative {
+    background-color:lightcyan;
+  }
+
+  
+  .table-container {
+    width: 45%;
+  }
+  

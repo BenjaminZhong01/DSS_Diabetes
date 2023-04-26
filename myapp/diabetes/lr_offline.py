@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix
 import pickle
 
 import pandas as pd
@@ -18,6 +19,7 @@ cur_file_path = os.path.dirname(os.path.abspath(__file__))
 config_file_path = os.path.join(cur_file_path, 'config.json')
 dataset_file_path = os.path.join(cur_file_path,'data','data_preprocess.csv')
 model_file_path = os.path.join(cur_file_path, 'data', 'model_fitted.sav')
+confusion_matrix_file_path = os.path.join(cur_file_path, 'data', 'confusion_matrix.txt')
 
 age_hist_file_path = os.path.join(cur_file_path, 'static', 'age_hist.png')
 gender_pie_file_path = os.path.join(cur_file_path, 'static', 'gender_pie.png')
@@ -146,6 +148,15 @@ def logistic_regression(dataset=dataset_file_path):
     # fit the model on the training data
     log_reg.fit(X_train, y_train)
 
+    # Predict test set labels
+    y_pred = log_reg.predict(X_test) 
+
+    # Obtain confusion matrix
+    cm = confusion_matrix(y_test, y_pred)
+
+    # Save confusion matrix to file
+    np.savetxt(confusion_matrix_file_path, cm, fmt='%d')
+
     # save the model to disk
     pickle.dump(log_reg, open(model_file_path, 'wb'))
 
@@ -237,4 +248,4 @@ def stat_plots(dataset=dataset_file_path):
 
 
 if __name__ == '__main__':
-    print(read_json('config.json'))
+    logistic_regression()

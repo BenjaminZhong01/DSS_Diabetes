@@ -6,12 +6,50 @@
 
 {% block content %}
 <div class="scrollable">
-    <div class="imgset">
+    <div class="tables-wrapper" style="display: flex; justify-content: center; margin: 30px;">
+        <div class="table-container" style="position: relative; left:500px;">
+            <table style="table-layout: fixed; width: 50%;">
+              <tr>
+                <th>Patient Number</th>
+                <td class="statd">520</td>
+              </tr>
+              <tr>
+                <th>Positive Number</th>
+                <td class="statd">320</td>
+              </tr>
+              <tr>
+                <th>Feature</th>
+                <td class="statd">16</td>
+              </tr>
+            </table>
+          </div>
+        <div class="table-container" style="position: relative; left:100px;">
+          <table>
+            <tr>
+              <th></th>
+              <th>Actual Positive</th>
+              <th>Actual Negative</th>
+            </tr>
+            <tr>
+              <th>Predicted Positive</th>
+              <td class="true-positive">{{ confusion_matrix.0.0 }}</td>
+              <td class="false-positive">{{ confusion_matrix.0.1 }}</td>
+            </tr>
+            <tr>
+              <th>Predicted Negative</th>
+              <td class="false-negative">{{ confusion_matrix.1.0 }}</td>
+              <td class="true-negative">{{ confusion_matrix.1.1 }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>      
+      
+    <div class="imgset" style="margin: 30px;">
         <img src="/static/age_hist.png" alt="Histogram of Age" class="stat">
         <img src="/static/gender_pie.png" alt="Histogram of Age"  class="stat">
     </div>
-    <div>
-        <img src="/static/symptom_hist.png" alt="Histogram of Age" class="stat">
+    <div style="margin: 30px;">
+        <img src="/static/symptom_hist.png" alt="Histogram of Age" class="stat">          
     </div>
 </div>
 

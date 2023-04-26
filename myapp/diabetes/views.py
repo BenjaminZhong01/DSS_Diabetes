@@ -4,6 +4,13 @@ from diabetes.forms import VitalsForm, PredictionForm
 
 from diabetes.lr_offline import save_record, to_csv, logistic_regression, predict, stat_plots
 
+import numpy as np
+
+import os
+
+cur_file_path = os.path.dirname(os.path.abspath(__file__))
+confusion_matrix_file_path = os.path.join(cur_file_path, 'data', 'confusion_matrix.txt')
+
 # Create your views here.
 def welcome_action(request):
     return render(request, 'diabetes/welcome.html', {})
@@ -109,7 +116,15 @@ def predict_action(request):
 
 def statistics_action(request):
     stat_plots()
-    return render(request, 'diabetes/statistics.html', {})
+
+    context = {}
+    # Read confusion matrix from file
+    cm = np.loadtxt(confusion_matrix_file_path, dtype=int)
+
+    # Pass confusion matrix to template as context variable
+    context = {'confusion_matrix': cm}
+
+    return render(request, 'diabetes/statistics.html', context)
 
 def suggestions_action(request):
     return render(request, 'diabetes/suggestions.html', {})
